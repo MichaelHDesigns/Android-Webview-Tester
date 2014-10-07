@@ -1,4 +1,4 @@
-package com.tdi.webviewtester;
+package org.t15.chrisnewton;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +8,7 @@ import java.io.Writer;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.t15.chrisnewton.webviewtester.R;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -36,7 +37,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class WebViewActivity extends Activity {
+public class WebViewTesterActivity extends Activity {
 	
 	private String urlToLoad = "http://172.27.164.58:8888/Aptana%20Studio%203%20Workspace/XFactor_Inapp/";
 	//private String urlToLoad = "http://172.27.164.48:8888/Git_Repositories/www/AA_Issues/issue-1/index-05.html";
@@ -142,7 +143,7 @@ public class WebViewActivity extends Activity {
 				webview.clearCache(true);
 				webview.loadUrl(urlToLoad);
 				*/
-				IntentIntegrator integrator = new IntentIntegrator( WebViewActivity.this );
+				IntentIntegrator integrator = new IntentIntegrator( WebViewTesterActivity.this );
 				integrator.initiateScan();
 				
 			}
