@@ -20,15 +20,13 @@
                 android:layout_marginLeft="5dp"
                 android:text="Development Mode" />
 
-            <Switch
-                android:id="@+id/localRemoteSwitch"
+            <ImageButton
+                android:id="@+id/reloadWebviewBut"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:text="Local/Remote"
-                android:textOff="Local"
-                android:textOn="Remote" />
+                android:layout_height="50dp"
+                android:layout_marginRight="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/reload" />
 
             <EditText
                 android:id="@+id/remoteUrlEditText"
@@ -39,16 +37,15 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="http://www.google.com"
+                android:hint="Enter url here or scan qr code by pressing button to the right"
                 android:inputType="textUri" />
 
             <ImageButton
-                android:id="@+id/reloadWebviewBut"
-                android:layout_width="wrap_content"
+                android:id="@+id/qrButton"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginRight="20dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/reload" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/qr" />
 
         </LinearLayout>
 

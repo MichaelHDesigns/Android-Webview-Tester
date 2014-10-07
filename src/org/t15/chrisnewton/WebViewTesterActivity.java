@@ -20,25 +20,32 @@ import android.os.Build;
 import android.os.Bundle;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.ContextThemeWrapper;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebChromeClient.CustomViewCallback;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 public class WebViewTesterActivity extends Activity {
 	
+	private WebView webview;
+	private EditText addressText;
 	private String urlToLoad = "http://172.27.164.58:8888/Aptana%20Studio%203%20Workspace/XFactor_Inapp/";
 	//private String urlToLoad = "http://172.27.164.48:8888/Git_Repositories/www/AA_Issues/issue-1/index-05.html";
 	//private String urlToLoad = "http://172.27.164.48:8888/Git_Repositories/www/AA_Issues/issue-5/index-ad-01.html";
@@ -54,7 +61,22 @@ public class WebViewTesterActivity extends Activity {
 		setContentView(R.layout.issue_viewer_nav);
 						
 		WebView.setWebContentsDebuggingEnabled(true);
-		final WebView webview = (WebView) findViewById(R.id.webView1);
+		webview = (WebView) findViewById(R.id.webView1);
+		addressText = (EditText) findViewById(R.id.remoteUrlEditText);
+		addressText.setImeActionLabel("Go", KeyEvent.KEYCODE_ENTER);
+		addressText.setOnEditorActionListener(new OnEditorActionListener() {
+			
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				// TODO Auto-generated method stub
+				urlToLoad = addressText.getText().toString();
+				webview.loadUrl(urlToLoad);	
+				// hide virtual keyboard
+		        InputMethodManager imm = (InputMethodManager) WebViewTesterActivity.this.getBaseContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+		        imm.hideSoftInputFromWindow(addressText.getWindowToken(), 0);
+				return true;
+			}
+		});
 
 		webview.getSettings().setJavaScriptEnabled(true);
 		// enables viewport meta tag
@@ -132,22 +154,26 @@ public class WebViewTesterActivity extends Activity {
 		
 		
 		
-		ImageButton reload = (ImageButton) findViewById(R.id.reloadWebviewBut);
-		
-		reload.setOnClickListener(new OnClickListener() {
-			
+		ImageButton reload = (ImageButton) findViewById(R.id.reloadWebviewBut);		
+		reload.setOnClickListener(new OnClickListener() {			
 			@Override
-			public void onClick(View v) {
-				/*
+			public void onClick(View v) {				
 				webview.invalidate();
 				webview.clearCache(true);
-				webview.loadUrl(urlToLoad);
-				*/
-				IntentIntegrator integrator = new IntentIntegrator( WebViewTesterActivity.this );
-				integrator.initiateScan();
-				
+				webview.loadUrl(urlToLoad);								
 			}
 		});
+		
+		ImageButton launchQr = (ImageButton) findViewById(R.id.qrButton);		
+		launchQr.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {				
+				IntentIntegrator integrator = new IntentIntegrator( WebViewTesterActivity.this );
+				integrator.initiateScan();				
+			}
+		});
+		
+		
 		
 	}	
 	
@@ -156,7 +182,12 @@ public class WebViewTesterActivity extends Activity {
 		  if (scanResult != null) {
 		    // handle scan result
 			  System.out.println("scan result = ");
-			  System.out.println(scanResult.getContents());
+			  //System.out.println(scanResult.getContents());
+			  urlToLoad = scanResult.getContents();
+			  webview.invalidate();
+			  webview.clearCache(true);
+			  webview.loadUrl(urlToLoad);
+			  addressText.setText(urlToLoad);
 		  }
 		  // else continue with any other code you need in the method
 		 
