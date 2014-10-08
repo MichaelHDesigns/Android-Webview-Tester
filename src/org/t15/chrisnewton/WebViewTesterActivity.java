@@ -39,6 +39,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -46,6 +47,7 @@ public class WebViewTesterActivity extends Activity {
 	
 	private WebView webview;
 	private EditText addressText;
+	private ProgressBar loader;
 	private String urlToLoad = "http://172.27.164.58:8888/Aptana%20Studio%203%20Workspace/XFactor_Inapp/";
 	//private String urlToLoad = "http://172.27.164.48:8888/Git_Repositories/www/AA_Issues/issue-1/index-05.html";
 	//private String urlToLoad = "http://172.27.164.48:8888/Git_Repositories/www/AA_Issues/issue-5/index-ad-01.html";
@@ -58,9 +60,11 @@ public class WebViewTesterActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.issue_viewer_nav);
-						
+		
+		setContentView(R.layout.issue_viewer_nav);						
 		WebView.setWebContentsDebuggingEnabled(true);
+		
+		loader = (ProgressBar) findViewById(R.id.loader);
 		webview = (WebView) findViewById(R.id.webView1);
 		addressText = (EditText) findViewById(R.id.remoteUrlEditText);
 		addressText.setImeActionLabel("Go", KeyEvent.KEYCODE_ENTER);
@@ -136,7 +140,9 @@ public class WebViewTesterActivity extends Activity {
 			public void onPageFinished(WebView view, String url) {
 				// TODO Auto-generated method stub
 				super.onPageFinished(view, url);
+				
 				System.out.println("onPageFinished NOW");
+				loader.setVisibility(View.GONE);
 				
 			}
 		});
@@ -157,9 +163,11 @@ public class WebViewTesterActivity extends Activity {
 		ImageButton reload = (ImageButton) findViewById(R.id.reloadWebviewBut);		
 		reload.setOnClickListener(new OnClickListener() {			
 			@Override
-			public void onClick(View v) {				
+			public void onClick(View v) {	
+				urlToLoad = addressText.getText().toString();
 				webview.invalidate();
 				webview.clearCache(true);
+				loader.setVisibility(View.VISIBLE);
 				webview.loadUrl(urlToLoad);								
 			}
 		});
@@ -186,6 +194,7 @@ public class WebViewTesterActivity extends Activity {
 			  urlToLoad = scanResult.getContents();
 			  webview.invalidate();
 			  webview.clearCache(true);
+			  loader.setVisibility(View.VISIBLE);
 			  webview.loadUrl(urlToLoad);
 			  addressText.setText(urlToLoad);
 		  }
