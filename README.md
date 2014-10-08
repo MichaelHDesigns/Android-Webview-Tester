@@ -10,4 +10,4 @@ This app aims to help development of HTML that is to be deployed to an Android w
 
 It features a full screen webview with a very basic address bar that can be updated to load in new content or refreshed once changes have been made.
 Another useful feature is a qr code reader for easy input of complicated dev urls.
-If it is running on a device with Android 4.4 or higher then the webview can be debugged in Desktop Chrome once connected to the machine over USB.
+If it is running on a device with Android 4.4 or higher then the webview can be debugged in Desktop Chrome once connected to the desktop machine over USB.
