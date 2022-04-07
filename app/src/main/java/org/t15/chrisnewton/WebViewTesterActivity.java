@@ -30,13 +30,7 @@ public class WebViewTesterActivity extends Activity {
 	private WebView webview;
 	private EditText addressText;
 	private ProgressBar loader;
-	private String urlToLoad = "http://172.27.164.58:8888/Aptana%20Studio%203%20Workspace/XFactor_Inapp/";
-	//private String urlToLoad = "http://172.27.164.48:8888/Git_Repositories/www/AA_Issues/issue-1/index-05.html";
-	//private String urlToLoad = "http://172.27.164.48:8888/Git_Repositories/www/AA_Issues/issue-5/index-ad-01.html";
-	//private String urlToLoad = "http://172.27.164.48:8888/Git_Repositories/www/AA_Issues/issue-1/index-10.html";
-	//private String urlToLoad = "http://172.27.164.48:8888/Git_Repositories/Springboard-MagazineContentsIssue1/dist/index-03.html";
-	//private String urlToLoad = "http://172.27.164.48:8888/Git_Repositories/www/HSBC/258-1381307199/262-dear-client.html";
-	//private String urlToLoad = "http://172.27.164.48:8888/Git_Repositories/www/AA_Issues/issue-4/GLOVEBOX5.html";
+	private String urlToLoad = "https://wallet.hth.world/";
 
 	@TargetApi(19)
 	@Override
